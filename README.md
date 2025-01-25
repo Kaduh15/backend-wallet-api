@@ -28,15 +28,115 @@ Isso iniciará os serviços da API e do banco de dados PostgreSQL.
 ### ✅ **Autenticação com JWT**
 
 - **Registro de Usuário** (`POST /auth/register/`)
+  - Requisição:
+    ```json
+    {
+        "username": "usuario1",
+        "email": "usuario1@example.com",
+        "password": "senha123"
+    }
+    ```
+  - Resposta:
+    ```json
+    {
+        "id": 1,
+        "username": "usuario1",
+        "email": "usuario1@example.com"
+    }
+    ```
+
 - **Login de Usuário** (`POST /auth/login/`)
+  - Requisição:
+    ```json
+    {
+        "username": "usuario1",
+        "password": "senha123"
+    }
+    ```
+  - Resposta:
+    ```json
+    {
+        "refresh": "REFRESH_TOKEN",
+        "access": "ACCESS_TOKEN"
+    }
+    ```
+
 - **Refresh Token** (`POST /auth/refresh/`)
+  - Requisição:
+    ```json
+    {
+        "refresh": "REFRESH_TOKEN"
+    }
+    ```
+  - Resposta:
+    ```json
+    {
+        "access": "NOVO_ACCESS_TOKEN"
+    }
+    ```
 
 ### ✅ **Gerenciamento de Carteira**
 
 - **Consultar Saldo** (`GET /wallet/balance/`)
+  - Requisição: (Autenticado com token JWT)
+  - Resposta:
+    ```json
+    {
+        "id": 1,
+        "user": 1,
+        "balance": "150.50"
+    }
+    ```
+
 - **Adicionar Saldo** (`PATCH /wallet/add/`)
+  - Requisição:
+    ```json
+    {
+        "amount": 100.00
+    }
+    ```
+  - Resposta:
+    ```json
+    {
+        "message": "Saldo adicionado com sucesso",
+        "balance": "250.50"
+    }
+    ```
+
 - **Transferências entre usuários** (`POST /wallet/transfer/`)
+  - Requisição:
+    ```json
+    {
+        "receiver": "usuario2",
+        "amount": 50.00
+    }
+    ```
+  - Resposta:
+    ```json
+    {
+        "id": 1,
+        "sender": "usuario1",
+        "receiver": "usuario2",
+        "amount": 50.00,
+        "timestamp": "2024-01-01T12:00:00Z"
+    }
+    ```
+
 - **Listar Transações** (`GET /wallet/transactions/`)
+  - Parâmetros Opcionais:
+    - `?start_date=2024-01-01&end_date=2024-01-31`
+  - Resposta:
+    ```json
+    [
+        {
+            "id": 1,
+            "sender": "usuario1",
+            "receiver": "usuario2",
+            "amount": 50.00,
+            "timestamp": "2024-01-01T12:00:00Z"
+        }
+    ]
+    ```
 
 ---
 
