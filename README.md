@@ -9,7 +9,7 @@ Esta API permite gerenciar carteiras digitais e realizar transferências entre u
 ### 1️⃣ **Clone o Repositório**
 
 ```bash
-git clone https://github.com/seu_usuario/backend-wallet-api.git
+git clone https://github.com/kaduh15/backend-wallet-api.git
 cd backend-wallet-api
 ```
 
